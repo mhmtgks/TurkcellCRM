@@ -5,19 +5,27 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Service
+//@Component
+
+//@CrossOrigin
 public class BaseSecurityService {
     private static final String[] WHITE_LIST_URLS = {
             "/swagger-ui/**",
-            "/v2/api-docs",
-            "/v3/api-docs",
-            "/v3/api-docs/**",
+            "/customerservice/api/v1/customers",
+            "http://localhost:9009/v3/api-docs",
             "/api/v1/auth/**"
     };
     private final JwtAuthFilter jwtAuthFilter;
+
+    public BaseSecurityService(JwtAuthFilter jwtAuthFilter) {
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
 
     public HttpSecurity configureCoreSecurity(HttpSecurity httpSecurity) throws Exception
     {

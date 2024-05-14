@@ -17,8 +17,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 //            " from customer c" +
 //            " where ( :#{#request.getNationalityId()} <= 0 or c.nationality_id= :#{#request.getNationalityId()})" +
 //            " and ( :#{#request.getCustomerId()} is null or c.id= :#{#request.getCustomerId()})")
-    @Query("SELECT c FROM Customer c WHERE c.motherName = 'asd'")
-    List<CreateCustomerResponse> search(CreateCustomerRequest request);
+//    @Query("SELECT c FROM Customer c WHERE c.motherName = 'asd'")
+//    List<CreateCustomerResponse> search(CreateCustomerRequest request);
 
 
     Optional<Customer> findByNationalityNumber(String nationalityId);

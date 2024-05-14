@@ -1,6 +1,7 @@
 package com.turkcell.TurkcellCRM.customerService.business.abstracts;
 
 
+import com.turkcell.TurkcellCRM.customerService.dtos.request.CreateUserJwtRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.SearchCustomerRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.create.CreateCustomerRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.update.UpdateCustomerRequest;
@@ -14,7 +15,8 @@ import java.util.List;
 
 public interface CustomerService {
     //todo response ve request yaz
-    List<CreateCustomerResponse> search(CreateCustomerRequest request);
+    List<SearchCustomerResponse> search();
+    String getJwt(CreateUserJwtRequest userInfo);
     CreateCustomerResponse add(CreateCustomerRequest customer);
     void delete(int id);
     GetCustomerResponse getById(int id);

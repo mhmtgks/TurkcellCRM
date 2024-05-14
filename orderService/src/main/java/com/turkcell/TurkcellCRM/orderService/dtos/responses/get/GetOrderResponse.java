@@ -12,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class GetOrderResponse {
-    @NotNull
+    private int addressId;
+    private int customerId;
+    private int totalAmount;
     private List<Product> products;
 }

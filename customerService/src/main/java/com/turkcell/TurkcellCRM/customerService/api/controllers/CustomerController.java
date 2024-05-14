@@ -1,6 +1,7 @@
 package com.turkcell.TurkcellCRM.customerService.api.controllers;
 
 import com.turkcell.TurkcellCRM.customerService.business.abstracts.CustomerService;
+import com.turkcell.TurkcellCRM.customerService.dtos.request.CreateUserJwtRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.SearchCustomerRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.create.CreateCustomerRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.update.UpdateCustomerRequest;
@@ -20,15 +21,22 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/customerservice/api/v1/customers")
+
 //@RequestMapping("/customerservice/customers")
 public class CustomerController {
     private CustomerService customerService;
-    @PostMapping("search")
-    public List<CreateCustomerResponse> search(@RequestBody CreateCustomerRequest request)
+    @GetMapping("search")
+    public List<SearchCustomerResponse> search()
     {
-        return customerService.search(request);
+        return customerService.search();
     }
 
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String login(@RequestBody CreateUserJwtRequest userInfo) {
+        return customerService.getJwt(userInfo);
+    }
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreateCustomerResponse add(@Valid @RequestBody CreateCustomerRequest createCustomerRequest) {

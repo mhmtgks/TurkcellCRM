@@ -4,9 +4,11 @@ package com.turkcell.TurkcellCRM.customerService.business.concretes;
 import com.turkcell.TurkcellCRM.customerService.business.abstracts.CustomerService;
 import com.turkcell.TurkcellCRM.customerService.business.rules.CustomerBusinessRules;
 
+import com.turkcell.TurkcellCRM.customerService.clients.IdentityServiceClient;
 import com.turkcell.TurkcellCRM.customerService.clients.OrderServiceClient;
 import com.turkcell.TurkcellCRM.customerService.core.crossCuttingConcerns.mapping.ModelMapperService;
 import com.turkcell.TurkcellCRM.customerService.dataAccess.CustomerRepository;
+import com.turkcell.TurkcellCRM.customerService.dtos.request.CreateUserJwtRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.SearchCustomerRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.create.CreateCustomerRequest;
 import com.turkcell.TurkcellCRM.customerService.dtos.request.update.UpdateCustomerRequest;
@@ -33,11 +35,18 @@ public class CustomerManager implements CustomerService {
     private CustomerBusinessRules customerBusinnesRules;
     private CustomerProducer customerProducer;
     private OrderServiceClient orderServiceClient;
+    private IdentityServiceClient identityServiceClient;
 
     @Override
-    public List<CreateCustomerResponse> search(CreateCustomerRequest request) {
+    public List<SearchCustomerResponse> search() {
       //  int result = orderServiceClient.getCustomerIdByOrderId(request.getOrderNumber());
-        return customerRepository.search(request);
+//        return customerRepository.search(request);
+        return orderServiceClient.getOrders();
+    }
+
+    @Override
+    public String getJwt(CreateUserJwtRequest userInfo) {
+        return identityServiceClient.getJwt(userInfo);
     }
 
     @Override
